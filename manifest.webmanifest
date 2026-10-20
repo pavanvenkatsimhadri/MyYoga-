@@ -1,0 +1,10 @@
+{
+  "name": "MyYoga \u2014 Your daily practice",
+  "short_name": "MyYoga",
+  "description": "A simple yoga practice and progress tracker starter.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbf8ef",
+  "theme_color": "#285b43",
+  "icons": []
+}

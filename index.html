@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#285b43">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>MyYoga — Your daily practice</title>
+<style>
+:root{--green:#285b43;--green2:#3d7657;--sage:#e8f0e5;--cream:#fbf8ef;--ink:#18352a;--muted:#66776d;--line:#e0e7dc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:14px;padding:12px 16px;font-weight:650}
+.primary{background:var(--green);color:white}.secondary{background:var(--sage);color:var(--green)}.plain{background:transparent;color:var(--green);padding:8px}
+header{position:sticky;top:0;z-index:5;background:#fbf8eff0;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top{max-width:1080px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:800;letter-spacing:-.03em}.logo{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:var(--green);color:white;font-size:22px}
+.top-actions{display:flex;gap:8px;align-items:center}.wrap{max-width:1080px;margin:auto;padding:24px 18px 90px}
+.hero{background:linear-gradient(120deg,#e2ecdd,#f6f0dc);border-radius:28px;padding:28px;display:grid;grid-template-columns:1.4fr .8fr;gap:20px;overflow:hidden;min-height:230px}
+.eyebrow{color:var(--green2);font-weight:800;text-transform:uppercase;letter-spacing:.09em;font-size:.75rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.02;letter-spacing:-.05em;margin:10px 0 12px;max-width:540px}
+p{margin:0 0 14px;color:var(--muted)}.hero-art{display:flex;align-items:center;justify-content:center;font-size:clamp(6rem,15vw,10rem);filter:drop-shadow(0 10px 10px #315b3020)}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:28px 0 14px}.section-head h2{margin:0;font-size:1.35rem;letter-spacing:-.03em}.section-head p{margin:3px 0 0;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:white;border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:0 4px 18px #1e3d2a08}
+.pose-icon{height:112px;border-radius:15px;background:linear-gradient(145deg,#e5efe1,#f6efd9);display:grid;place-items:center;font-size:3.4rem;margin-bottom:13px}
+.card h3{margin:0 0 5px;font-size:1.05rem}.meta{font-size:.82rem;color:var(--muted);margin-bottom:13px}.card p{font-size:.9rem;min-height:38px}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}.tag{font-size:.76rem;font-weight:700;color:var(--green);background:var(--sage);padding:5px 9px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:white;border:1px solid var(--line);border-radius:18px;padding:17px}.stat strong{display:block;font-size:1.8rem;letter-spacing:-.04em}.stat span{font-size:.85rem;color:var(--muted)}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool{display:flex;gap:14px;align-items:flex-start}.tool-icon{width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:14px;background:var(--sage);font-size:1.35rem}.tool h3{margin:0 0 5px}.tool p{font-size:.9rem}
+.progress-track{height:9px;background:#edf0e8;border-radius:99px;overflow:hidden;margin:12px 0}.progress-fill{height:100%;background:var(--green2);width:0%;transition:width .25s}
+.notice{font-size:.85rem;background:#f8f0d9;border:1px solid #eadcb4;color:#67552b;padding:12px 14px;border-radius:14px;margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:26px 0}
+dialog{border:1px solid var(--line);border-radius:22px;padding:0;width:min(500px,calc(100% - 28px));box-shadow:0 25px 80px #0003;color:var(--ink)}dialog::backdrop{background:#10251bb0}.modal{padding:23px}.modal h2{margin:0 0 8px}.modal label{display:block;font-weight:650;font-size:.9rem;margin:14px 0 6px}.modal input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white}.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}.small{font-size:.8rem;color:var(--muted)}
+nav{display:none}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding:23px;min-height:0}.hero-art{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools{grid-template-columns:1fr}.top{padding:10px 14px}.wrap{padding:18px 14px 100px}.top-actions button{padding:10px 11px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:1.5rem}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.card{display:grid;grid-template-columns:78px 1fr;gap:0 13px}.pose-icon{height:90px;grid-row:span 4;margin:0;font-size:2.6rem}.card p{min-height:0}.card-foot{grid-column:2}.stats{grid-template-columns:1fr}.stat{display:flex;justify-content:space-between;align-items:center}.stat strong{font-size:1.35rem}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><span class="logo">ॐ</span><span>MyYoga</span></div>
+  <div class="top-actions"><span id="userLabel" class="small">Guest mode</span><button class="secondary" id="accountBtn">Sign in</button></div>
+</div></header>
+<main class="wrap">
+<section class="hero">
+  <div><div class="eyebrow">Your space to reset</div><h1 id="greeting">Breathe in. Find your balance.</h1><p>A little practice, a little progress. Build a yoga habit that feels right for you.</p>
+  <div class="hero-buttons"><button class="primary" onclick="startSession('Beginner Flow')">Start today's practice →</button><button class="secondary" onclick="scrollToSection('library')">Explore yoga</button></div></div>
+  <div class="hero-art" aria-hidden="true">🧘</div>
+</section>
+
+<div class="section-head"><div><h2>Today's plan</h2><p>A gentle starter plan — adjust it to your comfort.</p></div><span class="tag">15 minutes</span></div>
+<section class="card">
+  <div style="display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap">
+    <div><h3>Beginner Flow</h3><p style="margin:4px 0 0">Easy breathing, Cat-Cow, Mountain Pose and relaxation.</p></div>
+    <button class="primary" onclick="startSession('Beginner Flow')">Complete session</button>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="todayFill"></div></div><div class="small" id="todayText">0 of 1 sessions completed today</div>
+</section>
+
+<div class="section-head" id="library"><div><h2>Yoga library</h2><p>Choose a routine for how you feel today.</p></div></div>
+<section class="grid" id="yogaGrid"></section>
+
+<div class="section-head" id="progress"><div><h2>Your progress</h2><p>Saved on this device for this starter version.</p></div><button class="plain" onclick="resetProgress()">Reset</button></div>
+<section class="stats">
+  <div class="stat"><div><span>Sessions completed</span><strong id="sessionsStat">0</strong></div><span>🌱</span></div>
+  <div class="stat"><div><span>Practice minutes</span><strong id="minutesStat">0</strong></div><span>⏱️</span></div>
+  <div class="stat"><div><span>Days practiced</span><strong id="daysStat">0</strong></div><span>🔥</span></div>
+</section>
+
+<div class="section-head"><div><h2>Coming next</h2><p>Advanced features to add after the starter app works.</p></div></div>
+<section class="tools">
+  <article class="card tool"><div class="tool-icon">📷</div><div><h3>AI posture coach</h3><p>Planned: camera-based body landmark detection and pose-specific guidance. It is not active in this starter.</p><button class="secondary" onclick="showInfo('AI posture coach','This requires a pose-estimation model, camera permission, pose-specific rules, and careful testing. It is not medical advice.')">View plan</button></div></article>
+  <article class="card tool"><div class="tool-icon">🔗</div><div><h3>Smart yoga mat</h3><p>Planned: connect a compatible mat over Bluetooth or its documented API. Exact hardware details are needed first.</p><button class="secondary" onclick="showInfo('Smart mat connection','Tell us the mat brand and model, or share its Bluetooth/API documentation. Different mats use different protocols.')">View plan</button></div></article>
+  <article class="card tool"><div class="tool-icon">👤</div><div><h3>Secure user accounts</h3><p>This demo sign-in is local only. Real accounts need a secure authentication service and privacy policy.</p><button class="secondary" onclick="showInfo('Real accounts','Do not enter a real password here. The demo only stores a display name on this device; it does not create a secure account.')">View plan</button></div></article>
+  <article class="card tool"><div class="tool-icon">🎬</div><div><h3>Yoga videos</h3><p>Routine cards are ready. Add your own videos or videos you have permission to embed.</p><button class="secondary" onclick="showInfo('Add yoga videos','The starter routines are text-based. Next, add video URLs you own or are authorized to use, then embed a player for each routine.')">View plan</button></div></article>
+</section>
+<div class="notice">Practice within a comfortable range. Stop if you feel pain, dizziness or unusual discomfort. This starter is a demo, not medical or personalized professional advice.</div>
+<footer>MyYoga • Original starter app • Built for your wellness journey</footer>
+</main>
+
+<dialog id="accountDialog"><form class="modal" id="accountForm"><h2>Welcome to MyYoga</h2><p>This is a local demo profile, not secure online authentication.</p><label for="displayName">Your display name</label><input id="displayName" maxlength="40" placeholder="e.g. Priya" autocomplete="nickname"><div class="modal-actions"><button type="button" class="secondary" onclick="accountDialog.close()">Cancel</button><button class="primary" type="submit">Save demo profile</button></div></form></dialog>
+<dialog id="infoDialog"><div class="modal"><h2 id="infoTitle"></h2><p id="infoBody"></p><div class="modal-actions"><button class="primary" onclick="infoDialog.close()">Got it</button></div></div></dialog>
+<script>
+const routines=[
+ {name:"Beginner Flow",time:15,level:"Beginner",icon:"🌿",desc:"A balanced start with gentle full-body movement."},
+ {name:"Morning Stretch",time:8,level:"Easy",icon:"🌅",desc:"Wake up your body with comfortable stretches."},
+ {name:"Calm & Breathe",time:10,level:"Relaxation",icon:"🌬️",desc:"Slow breathing and mindful relaxation."},
+ {name:"Balance Practice",time:12,level:"Beginner",icon:"🌳",desc:"Build steady focus with supported balance poses."},
+ {name:"Gentle Flexibility",time:15,level:"Easy",icon:"🌸",desc:"Move gradually and never force a stretch."},
+ {name:"Evening Unwind",time:10,level:"Relaxation",icon:"🌙",desc:"A quiet routine to close the day."}
+];
+const defaultState={sessions:0,minutes:0,days:[],completedToday:false,profile:""};
+let state={...defaultState,...safeLoad()};
+function safeLoad(){try{return JSON.parse(localStorage.getItem("myyoga_state")||"{}")}catch(e){return {}}}
+function save(){try{localStorage.setItem("myyoga_state",JSON.stringify(state))}catch(e){}}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function renderRoutines(){
+ document.getElementById("yogaGrid").innerHTML=routines.map(r=>`<article class="card"><div class="pose-icon">${r.icon}</div><div><h3>${r.name}</h3><div class="meta">${r.time} min · ${r.level}</div><p>${r.desc}</p><div class="card-foot"><span class="tag">${r.level}</span><button class="secondary" onclick="startSession('${r.name.replace(/'/g,"\\'")}')">Start</button></div></div></article>`).join("");
+}
+function render(){
+ document.getElementById("sessionsStat").textContent=state.sessions;
+ document.getElementById("minutesStat").textContent=state.minutes;
+ document.getElementById("daysStat").textContent=state.days.length;
+ document.getElementById("todayFill").style.width=state.completedToday?"100%":"0%";
+ document.getElementById("todayText").textContent=state.completedToday?"Today's practice completed — nice work!":"0 of 1 sessions completed today";
+ document.getElementById("userLabel").textContent=state.profile?`Hi, ${state.profile}`:"Guest mode";
+ document.getElementById("accountBtn").textContent=state.profile?"Edit profile":"Sign in";
+ document.getElementById("greeting").textContent=state.profile?`Welcome back, ${state.profile}.`:"Breathe in. Find your balance.";
+}
+function startSession(name){
+ const r=routines.find(x=>x.name===name)||routines[0];
+ if(!confirm(`Complete "${r.name}" (${r.time} minutes) and add it to your progress? Only mark it complete after you actually practise.`))return;
+ state.sessions++;state.minutes+=r.time;state.completedToday=true;
+ const d=todayKey();if(!state.days.includes(d))state.days.push(d);
+ save();render();showInfo("Practice recorded 🌱",`${r.name} added to your progress. Take a moment to notice how you feel.`);
+}
+function resetProgress(){if(confirm("Reset all saved practice progress on this device?")){state.sessions=0;state.minutes=0;state.days=[];state.completedToday=false;save();render()}}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function showInfo(title,body){document.getElementById("infoTitle").textContent=title;document.getElementById("infoBody").textContent=body;document.getElementById("infoDialog").showModal()}
+const accountDialog=document.getElementById("accountDialog"),infoDialog=document.getElementById("infoDialog");
+document.getElementById("accountBtn").addEventListener("click",()=>{document.getElementById("displayName").value=state.profile||"";accountDialog.showModal()});
+document.getElementById("accountForm").addEventListener("submit",e=>{e.preventDefault();state.profile=document.getElementById("displayName").value.trim();save();render();accountDialog.close()});
+renderRoutines();render();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
